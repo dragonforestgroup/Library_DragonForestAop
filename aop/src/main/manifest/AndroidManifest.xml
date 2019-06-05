@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dragonforest.android.library.aop">
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".TestActivity"/>
+        <activity android:name=".annotation.permission.PermissionActivity" android:launchMode="singleInstance" />
+    </application>
+
+</manifest>
