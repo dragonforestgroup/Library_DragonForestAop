@@ -77,12 +77,14 @@ public class PermissionAspect {
             @Override
             public void onPermissionDenied(int requestCode, String[] deniedPers) {
                 Log.e(getClass().getSimpleName(),"onPermissionDenied（）");
-                Method[] methods = aThis.getClass().getMethods();
+//                Method[] methods = aThis.getClass().getMethods();
+                Method[] methods = aThis.getClass().getDeclaredMethods();
                 for (Method method1 : methods) {
                     boolean annotationPresent = method1.isAnnotationPresent(PermissionDenied.class);
                     if (annotationPresent) {
                         Log.e(getClass().getSimpleName(),"deny callback method is :"+method1.getName());
                         try {
+                            method1.setAccessible(true);
                             method1.invoke(aThis, requestCode, deniedPers);
                         } catch (Exception e) {
                             e.printStackTrace();

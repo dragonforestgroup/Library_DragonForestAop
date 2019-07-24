@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PermissionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.e("TAG", "PermissionActivity onCreate()");
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         requestCode = extras.getInt("requestCode");
@@ -35,9 +36,9 @@ public class PermissionActivity extends Activity {
         startRequestPermissions();
     }
 
-    private void finishWithNoAnim(){
+    private void finishWithNoAnim() {
         finish();
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     private void startRequestPermissions() {
@@ -93,6 +94,7 @@ public class PermissionActivity extends Activity {
     /**
      * 开始请求权限
      * 外部调用
+     *
      * @param context
      * @param permissions
      * @param requestCode
@@ -107,8 +109,8 @@ public class PermissionActivity extends Activity {
         intent.putExtras(bundle);
         context.startActivity(intent);
 
-        if(context instanceof Activity){
-            ((Activity) context).overridePendingTransition(0,0);
+        if (context instanceof Activity) {
+            ((Activity) context).overridePendingTransition(0, 0);
         }
     }
 }

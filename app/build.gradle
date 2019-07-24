@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'aspectj-plugin'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION.toInteger()
     defaultConfig {
-        applicationId "com.dragonforest.android.library.aop"
+        applicationId "com.dragonforest.android.library.testAop"
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TARGET_SDK_VERSION.toInteger()
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -31,25 +34,24 @@ dependencies {
     //==============二方库-end===============================
 
     //==============三方库===============================
-    implementation 'org.aspectj:aspectjrt:1.9.2'
+//    implementation 'org.aspectj:aspectjrt:1.9.2'
     //==============三方库-end===============================
 
 }
 
-
 //AOP配置
-import org.aspectj.tools.ajc.Main
-project.android.applicationVariants.all { variant ->
-    //在编译后 增加行为
-    JavaCompile javaCompile = variant.javaCompile
-    javaCompile.doLast {
-        String[] args = ["-showWeaveInfo",
-                         "-1.8",
-                         "-inpath", javaCompile.destinationDir.toString(),
-                         "-aspectpath", javaCompile.classpath.asPath,
-                         "-d", javaCompile.destinationDir.toString(),
-                         "-classpath", javaCompile.classpath.asPath,
-                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
-        new Main().runMain(args, false);
-    }
-}
+//import org.aspectj.tools.ajc.Main
+//project.android.applicationVariants.all { variant ->
+//    //在编译后 增加行为
+//    JavaCompile javaCompile = variant.javaCompile
+//    javaCompile.doLast {
+//        String[] args = ["-showWeaveInfo",
+//                         "-1.8",
+//                         "-inpath", javaCompile.destinationDir.toString(),
+//                         "-aspectpath", javaCompile.classpath.asPath,
+//                         "-d", javaCompile.destinationDir.toString(),
+//                         "-classpath", javaCompile.classpath.asPath,
+//                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+//        new Main().runMain(args, false);
+//    }
+//}
